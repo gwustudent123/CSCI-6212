@@ -28,31 +28,6 @@ data.frame(n,niterations,time_elapsed, time_per_iter,
 }
 
 nvalues = floor(10^(seq(1,8,length.out=100)))
-nvalues=data.frame(nvalues,r=rnorm(length(nvalues))) %>% arrange(r) 
-nvalues=nvalues$nvalues
-nvalues
-
-for (i in 1:length(nvalues)) {
-  n = nvalues[i]
-  print(paste0("n=",n))
-  temp = f(n)
-  if (i==1) {df=temp}
-  else {df=rbind(df,temp)}
+for (n in nvalues) {
+print(f(n))
 }
-
-scale_factor = median(df$time_per_iter)
-scale_factor
-df$scaled_time_complexity = df$time_complexity*scale_factor
-df = df %>% subset(time_per_iter<2000)
-
-exp = df %>% mutate(logn=log10(n), grp='Experimental Result') %>% rename(time=time_elapsed) %>%
-  select(grp, n, logn, time)
-theoretical = df %>% mutate(logn=log10(n), grp='Theoretical Result') %>% 
-  rename(time=scaled_time_complexity) %>% select(grp, n, logn, time)
-df2 = rbind(exp,theoretical)
-
-ggplot(df2, aes(x=n, y=time)) + geom_point(aes(color=grp)) + geom_line(aes(color=grp)) + labs(x="n", y="nanoseconds", color="") + theme_minimal() 
-
-ggplot(df2, aes(x=logn, y=time)) + geom_point(aes(color=grp)) + geom_line(aes(color=grp)) + labs(x="log(n)", y="nanoseconds", color="") + theme_minimal() 
-
-
