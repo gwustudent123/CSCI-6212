@@ -21,7 +21,7 @@ while (j < n) {
 end_time = Sys.time()
 time_elapsed = (10^9)*as.numeric(end_time - start_time)
 time_per_iter = time_elapsed/niterations
-data.frame(n,niterations,time_elapsed, time_per_iter, 
+list(n,niterations,time_elapsed, time_per_iter, 
            time_complexity=n^(2/3))
 }
 
