@@ -1,0 +1,9 @@
+project2.R
+
+This is an R program that can be run https://rdrr.io/snippets/
+
+It defines the function rightShiftMax which is the implementation of the algorithm to find the maximum in a sorted right-shifted array.
+
+The function rightShift is used in creating right-shifted arrays for testing.
+
+The function is called on different values below
